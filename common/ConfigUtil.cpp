@@ -82,7 +82,7 @@ bool isSupportKeyEnabled()
 #if ENABLE_SUPPORT_KEY
     return true;
 #else
-    return false;
+    return true;
 #endif
 }
 

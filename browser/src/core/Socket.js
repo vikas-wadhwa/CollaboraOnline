@@ -62,7 +62,7 @@ app.definitions.Socket = L.Class.extend({
 			try {
 				this.socket = window.createWebSocket(this.getWebSocketBaseURI(map));
 			} catch (e) {
-				this._map.fire('error', {msg: _('Oops, there is a problem connecting to {productname}: ').replace('{productname}', (typeof brandProductName !== 'undefined' ? brandProductName : 'Collabora Online Development Edition (unbranded)')) + e, cmd: 'socket', kind: 'failed', id: 3});
+				this._map.fire('error', {msg: _('Oops, there is a problem connecting to {productname}: ').replace('{productname}', (typeof brandProductName !== 'undefined' ? brandProductName : 'Document Collaborator')) + e, cmd: 'socket', kind: 'failed', id: 3});
 				return;
 			}
 		}
@@ -667,7 +667,7 @@ app.definitions.Socket = L.Class.extend({
 			if (window.indirectSocket) {
 				if (window.expectedServerId && window.expectedServerId != this.WSDServer.Id) {
 					if (this.IndirectSocketReconnectCount++ >= 3) {
-						var msg = errorMessages.clusterconfiguration.replace('{productname}', (typeof brandProductName !== 'undefined' ? brandProductName : 'Collabora Online Development Edition (unbranded)'));
+						var msg = errorMessages.clusterconfiguration.replace('{productname}', (typeof brandProductName !== 'undefined' ? brandProductName : 'Document Collaborator'));
 						msg = msg.replace('{0}', window.expectedServerId);
 						msg = msg.replace('{1}', window.routeToken);
 						msg = msg.replace('{2}', this.WSDServer.Id);
@@ -1112,10 +1112,9 @@ app.definitions.Socket = L.Class.extend({
 		else if (textMsg.startsWith('error:') && !this._map._docLayer) {
 			textMsg = textMsg.substring(6);
 			if (command.errorKind === 'hardlimitreached') {
-
-				textMsg = errorMessages.limitreachedprod;
-				textMsg = textMsg.replace('{0}', command.params[0]);
-				textMsg = textMsg.replace('{1}', command.params[1]);
+				// textMsg = errorMessages.limitreachedprod;
+				// textMsg = textMsg.replace('{0}', command.params[0]);
+				// textMsg = textMsg.replace('{1}', command.params[1]);
 			}
 			else if (command.errorKind === 'serviceunavailable') {
 				textMsg = errorMessages.serviceunavailable;
@@ -1151,7 +1150,7 @@ app.definitions.Socket = L.Class.extend({
 				textMsg = textMsg.replace('{docs}', command.params[0]);
 				textMsg = textMsg.replace('{connections}', command.params[1]);
 				textMsg = textMsg.replace('{productname}', (typeof brandProductName !== 'undefined' ?
-					brandProductName : 'Collabora Online Development Edition (unbranded)'));
+					brandProductName : 'Document Collaborator'));
 				this._map.fire('infobar',
 					{
 						msg: textMsg,

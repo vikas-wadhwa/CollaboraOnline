@@ -55,7 +55,7 @@ class AboutDialog {
 			productName =
 				typeof brandProductName !== 'undefined'
 					? brandProductName
-					: 'Collabora Online Development Edition (unbranded)';
+					: 'Document Collaborator';
 		}
 		var productURL =
 			typeof brandProductURL !== 'undefined'
