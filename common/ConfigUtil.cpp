@@ -80,9 +80,9 @@ bool isSslEnabled()
 bool isSupportKeyEnabled()
 {
 #if ENABLE_SUPPORT_KEY
-    return true;
+    return false;
 #else
-    return true;
+    return false;
 #endif
 }
 
