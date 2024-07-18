@@ -2799,45 +2799,45 @@ void COOLWSD::innerInitialize(Application& self)
     setenv("LOK_HELP_URL", "", 1);
 #endif
 
-    if (config::isSupportKeyEnabled())
-    {
-        const std::string supportKeyString = getConfigValue<std::string>(conf, "support_key", "");
+    // if (config::isSupportKeyEnabled())
+    // {
+    //     const std::string supportKeyString = getConfigValue<std::string>(conf, "support_key", "");
 
-        if (supportKeyString.empty())
-        {
-            LOG_WRN("Support key not set, please use 'coolconfig set-support-key'.");
-            std::cerr << "Support key not set, please use 'coolconfig set-support-key'." << std::endl;
-            COOLWSD::OverrideWatermark = "Unsupported, the support key is missing.";
-        }
-        else
-        {
-            SupportKey key(supportKeyString);
+    //     if (supportKeyString.empty())
+    //     {
+    //         LOG_WRN("Support key not set, please use 'coolconfig set-support-key'.");
+    //         std::cerr << "Support key not set, please use 'coolconfig set-support-key'." << std::endl;
+    //         COOLWSD::OverrideWatermark = "Unsupported, the support key is missing.";
+    //     }
+    //     else
+    //     {
+    //         SupportKey key(supportKeyString);
 
-            if (!key.verify())
-            {
-                LOG_WRN("Invalid support key, please use 'coolconfig set-support-key'.");
-                std::cerr << "Invalid support key, please use 'coolconfig set-support-key'." << std::endl;
-                COOLWSD::OverrideWatermark = "Unsupported, the support key is invalid.";
-            }
-            else
-            {
-                int validDays =  key.validDaysRemaining();
-                if (validDays <= 0)
-                {
-                    LOG_WRN("Your support key has expired, please ask for a new one, and use 'coolconfig set-support-key'.");
-                    std::cerr << "Your support key has expired, please ask for a new one, and use 'coolconfig set-support-key'." << std::endl;
-                    COOLWSD::OverrideWatermark = "Unsupported, the support key has expired.";
-                }
-                else
-                {
-                    LOG_INF("Your support key is valid for " << validDays << " days");
-                    COOLWSD::MaxConnections = 1000;
-                    COOLWSD::MaxDocuments = 200;
-                    COOLWSD::OverrideWatermark.clear();
-                }
-            }
-        }
-    }
+    //         if (!key.verify())
+    //         {
+    //             LOG_WRN("Invalid support key, please use 'coolconfig set-support-key'.");
+    //             std::cerr << "Invalid support key, please use 'coolconfig set-support-key'." << std::endl;
+    //             COOLWSD::OverrideWatermark = "Unsupported, the support key is invalid.";
+    //         }
+    //         else
+    //         {
+    //             int validDays =  key.validDaysRemaining();
+    //             if (validDays <= 0)
+    //             {
+    //                 LOG_WRN("Your support key has expired, please ask for a new one, and use 'coolconfig set-support-key'.");
+    //                 std::cerr << "Your support key has expired, please ask for a new one, and use 'coolconfig set-support-key'." << std::endl;
+    //                 COOLWSD::OverrideWatermark = "Unsupported, the support key has expired.";
+    //             }
+    //             else
+    //             {
+    //                 LOG_INF("Your support key is valid for " << validDays << " days");
+    //                 COOLWSD::MaxConnections = 1000;
+    //                 COOLWSD::MaxDocuments = 200;
+    //                 COOLWSD::OverrideWatermark.clear();
+    //             }
+    //         }
+    //     }
+    // }
 
     if (COOLWSD::MaxConnections < 3)
     {
